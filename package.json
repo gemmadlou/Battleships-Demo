@@ -1,0 +1,23 @@
+{
+  "name": "roxxibox-vanilla",
+  "version": "0.0.0",
+  "description": "Boilerplate for mocking vanilla js prototypes and applications rapidly.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:gemmadlou/Roxxibox-Vanilla.git"
+  },
+  "author": "Gemma Black (gemmadlou.github.io)",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-mocha-test": "^0.12.7",
+    "load-grunt-tasks": "^3.3.0",
+    "mocha": "^2.3.3"
+  }
+}
