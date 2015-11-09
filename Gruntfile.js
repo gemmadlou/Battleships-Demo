@@ -11,28 +11,25 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				src: [
-					'src/helpers/common.js', 
-					'src/refs/data.js', 
-					'src/models/Game.js', 
-					'src/models/Ship.js', 
+					'src/models/**/*.js',
+					'src/services/**/*.js',
+					'src/refs/*.js',
+					'src/helpers/*.js',
 					'src/app.js'
 				],
 				dest: 'dist/app.js',
 			}
 		},
-		mochaTest: {
-			test: {
-				options: {
-					reporter: 'spec',
-					clearRequireCache: true
-				},
-				src: ['tests/**/*.js']
-			},
+		mocha_phantomjs: {
+			all: ['tests/**/*.html']
 		},
 		watch: {
 			scripts: {
-				files: 'src/**/*.js',
-				tasks: ['concat'],
+				files: [
+					'src/**/*.js',
+					'tests/**/*.js'
+				],
+				tasks: ['concat', 'mocha_phantomjs'],
 				options: {
 					livereload: true,
 					interrupt: true,
@@ -41,6 +38,6 @@ module.exports = function(grunt) {
 		}
 	});
 
-	grunt.registerTask('default', ['concat', 'mochaTest']);
+	grunt.registerTask('default', ['concat', 'mocha_phantomjs']);
 	
 }

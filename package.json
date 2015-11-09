@@ -13,10 +13,11 @@
   "author": "Gemma Black (gemmadlou.github.io)",
   "license": "ISC",
   "devDependencies": {
+    "chai": "^3.4.1",
     "grunt": "^0.4.5",
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-mocha-test": "^0.12.7",
+    "grunt-mocha-phantomjs": "^2.0.0",
     "load-grunt-tasks": "^3.3.0",
     "mocha": "^2.3.3"
   }

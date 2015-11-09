@@ -1,12 +1,4 @@
-function Battleship() {
-	this.size = 5;
-	this.coordinates = ["", "", "", "", ""]
-};function Destroyer() {
-	this.size = 4;
-	this.coordinates = [ "", "", "", "" ]
-};function Game() {
-
-};function App() {
+function App() {
 	this.init();
 }
 
@@ -20,4 +12,4 @@ App.prototype.createGame = function() {
 	} else {
 		throw new Error('Game already created');
 	}
-};var app = new App();
+}
