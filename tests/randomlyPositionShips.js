@@ -1,5 +1,4 @@
 'use strict';
-var should = require('chai').should();
 
 /**
  * Story: Ships are randomly positioned on the grid
@@ -9,51 +8,26 @@ var should = require('chai').should();
  */
 
 describe('Feature: Randomly position ships on a 10x10 grid', function() {
-
-	context('Scenario 1: Given game has no grid but has ships', function() {
-		
-		describe('When game randomly positions ships', function() {
-			
-			it('Should fail due to no grid', function() {
-				
-				app.should.throw(Error);
-				
-			});
-			
-		});
 	
-	});
+	context('Scenario 1: Given app has initiated', function() {
 	
-	context('Scenario 2: Given game has grid but no ships', function() {
-	
-		describe('When game randomly positions ships', function() {
-			
-			it('Should fail due to no ships', function() {
-				
-				app.should.throw(Error);
-				
-			});
-			
-		});
-	
-	});
-	
-	context('Scenario 3: Given game has grid and ships', function() {
-	
-		describe('When game randomly positions ships '
-				+ 'And 3 ships have size 3', function() {
-			
+		describe('When game randomly positions 3 ships '
+				+ '1 Battleship and 2 Destroyer', function() {
 			
 			it('Should assign all ships a location', function() {
 				game.ships[0].location[0].should.not.equal('');
 				game.ships[0].location[1].should.not.equal('');
 				game.ships[0].location[2].should.not.equal('');
+				game.ships[0].location[3].should.not.equal('');
+				game.ships[0].location[4].should.not.equal('');
 				game.ships[1].location[0].should.not.equal('');
 				game.ships[1].location[1].should.not.equal('');
 				game.ships[1].location[2].should.not.equal('');
+				game.ships[1].location[3].should.not.equal('');
 				game.ships[2].location[0].should.not.equal('');
 				game.ships[2].location[1].should.not.equal('');
 				game.ships[2].location[2].should.not.equal('');
+				game.ships[2].location[3].should.not.equal('');
 				
 			});
 			

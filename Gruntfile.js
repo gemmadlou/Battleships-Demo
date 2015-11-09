@@ -27,7 +27,8 @@ module.exports = function(grunt) {
 			scripts: {
 				files: [
 					'src/**/*.js',
-					'tests/**/*.js'
+					'tests/**/*.js',
+					'tests/**/*.html'
 				],
 				tasks: ['concat', 'mocha_phantomjs'],
 				options: {
