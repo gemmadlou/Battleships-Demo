@@ -1,3 +1,3 @@
-#Roxxibox Vanilla
+#Battleships Demo
 
-Boilerplate for mocking vanilla js prototypes and applications rapidly.
+A one-sided game of Battleships
