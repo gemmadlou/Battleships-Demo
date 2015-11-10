@@ -1,8 +1,15 @@
 #Battleships Demo
 
-**How to play?**
 
 Available here: http://projects.anonymousjcreative.com/miniapps/battleships/
+
+**How to play?**
+
+The rules:
+
+On the grid, are secretly placed ships. 1 Battleship, and 2 Destroyers.
+
+Sink them!
 
 Enter a command as in A1, E3.
 
