@@ -71,7 +71,6 @@ Game.prototype.getRowOfSquares = function(rowLength) {
 	
 }
 
-// DELETE ?
 Game.prototype.isRow = function(row) {
 	var y;
 	for (var i = 0; i < row.length; i++) {
@@ -134,25 +133,17 @@ Game.prototype.randomlyPositionShips = function() {
 		
 		var nextShip = ships[0];
 		
-		//var randomSquare = base.pickASquare();
-		
 		if (base.rollDice(1,2) === 1) {
 			var coordinates = base.getColumnOfSquares(nextShip.size);
 		} else {
 			var coordinates = base.getRowOfSquares(nextShip.size);
 		}
-		//console.log("coordinates", coordinates);
-		if (!coordinates) {
-			return positionShip(ships);
-		}
 		
-		//console.log(nextShip, randomSquare);
-		for (var i = 0; i < nextShip.size; i++) {
-			//randomSquare.addToShip(nextShip);
+		if (!coordinates) {
+			return positionShip(ships); // Invalid - try again
 		}
 		
 		for (var i in coordinates) {
-			//console.log(coordinates[i], "jeepers");
 			coordinates[i].addShip(nextShip);
 		}
 		
