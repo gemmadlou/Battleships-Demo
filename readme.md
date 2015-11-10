@@ -25,7 +25,7 @@ $ git clone https://github.com/gemmadlou/Battleships-Demo.git
 
 ```
 
-$ install dependencies
+# install dependencies
 $ npm install
 
 # to compile and run tests
