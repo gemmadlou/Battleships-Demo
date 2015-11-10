@@ -15,6 +15,19 @@ Battleship.prototype.AddToGame = function() {
 Battleship.prototype.addToSquare = function(square) {
 	var index = this.location.indexOf('');
 	this.location[index] = square;
+}
+
+Battleship.prototype.isSunk = function() {
+	var counter = 0;
+	for (var i in this.location) {
+		var location = this.location[i];
+		if (location.isHit()) {
+			counter++;
+		}
+	}
+	console.log(counter, this.size, counter === this.size);
+	
+	return counter === this.size;
 };function Destroyer(_game) {
 	this.size = 4;
 	this.location = [ "", "", "", "" ]
@@ -33,6 +46,19 @@ Destroyer.prototype.AddToGame = function() {
 Destroyer.prototype.addToSquare = function(square) {
 	var index = this.location.indexOf('');
 	this.location[index] = square;
+}
+
+Destroyer.prototype.isSunk = function() {
+	var counter = 0;
+	for (var i in this.location) {
+		var location = this.location[i];
+		if (location.isHit()) {
+			counter++;
+		}
+	}
+	console.log(counter, this.size, counter === this.size);
+	
+	return counter === this.size;
 };function Game() {
 	this.ships = [];
 	this.gridsize = [10, 10];
@@ -106,7 +132,6 @@ Game.prototype.getRowOfSquares = function(rowLength) {
 	
 }
 
-// DELETE ?
 Game.prototype.isRow = function(row) {
 	var y;
 	for (var i = 0; i < row.length; i++) {
@@ -169,25 +194,17 @@ Game.prototype.randomlyPositionShips = function() {
 		
 		var nextShip = ships[0];
 		
-		//var randomSquare = base.pickASquare();
-		
 		if (base.rollDice(1,2) === 1) {
 			var coordinates = base.getColumnOfSquares(nextShip.size);
 		} else {
 			var coordinates = base.getRowOfSquares(nextShip.size);
 		}
-		//console.log("coordinates", coordinates);
-		if (!coordinates) {
-			return positionShip(ships);
-		}
 		
-		//console.log(nextShip, randomSquare);
-		for (var i = 0; i < nextShip.size; i++) {
-			//randomSquare.addToShip(nextShip);
+		if (!coordinates) {
+			return positionShip(ships); // Invalid - try again
 		}
 		
 		for (var i in coordinates) {
-			//console.log(coordinates[i], "jeepers");
 			coordinates[i].addShip(nextShip);
 		}
 		
@@ -197,6 +214,31 @@ Game.prototype.randomlyPositionShips = function() {
 	}
 	
 	positionShip(shipsArray);
+}
+
+Game.prototype.fire = function(x, y) {
+	
+	var response = {
+		message: 'No hit'
+	};
+	
+	stop:
+	for (var i in this.ships) {
+		var ship = this.ships[i];
+		for (var n in ship.location) {
+			var location = ship.location[n];
+			if (location.x === x && location.y === y) {
+				location.addHit();
+				response.message = 'Successful hit';
+				if (ship.isSunk()) {
+					response.message = 'You have sunk the '+ ship.constructor.name;
+				}
+				break stop;
+			}
+		}
+	}
+	
+	return response;
 };function Grid(_game) {
 	this._game = _game;
 	this.squares = [];
@@ -215,6 +257,7 @@ Grid.prototype.addSquare = function(square) {
 	this.y = y;
 	this.x = x;
 	this._ship = undefined;
+	this.hit = false;
 	
 	this.addToGrid();
 }
@@ -226,6 +269,14 @@ Square.prototype.addToGrid = function() {
 Square.prototype.addShip = function(ship) {
 	this._ship = ship;
 	this._ship.addToSquare(this);
+}
+
+Square.prototype.addHit = function() {
+	this.hit = true;
+}
+
+Square.prototype.isHit = function() {
+	return this.hit;
 };function GameService() {
 	this.rowCoords = ['A','B','C','D','E','F','G','H','I','J'];
 	this.init();
@@ -252,4 +303,39 @@ GameService.prototype.init = function() {
 	
 	this.game.randomlyPositionShips();
 	
+}
+
+GameService.prototype.fire = function() {
+	var command = document.getElementById('command').value;
+	console.log("command", command);
+	if (command.length > 3) {
+		return alert("Invalid command length");
+	}
+	
+	var row = command.substr(0, 1),
+		column = command.substr(1, command.length);
+	
+	if (!isNaN(row)) {
+		return alert("Command invalid. First command should be a character - not a number");
+	}
+	
+	if (isNaN(column)) {
+		return alert("Command invalid. Command should be as in A1, B10 etc");
+	}
+	
+	if (row > 'J') {
+		return alert("Command invalid. J is the maximum letter");
+	}
+	
+	if (column > 10 || column < 1) {
+		return alert("Command invalid. coordinate should be between 1-10");
+	}
+	
+	var x = this.rowCoords.indexOf(row.toUpperCase());
+	console.log("x", x, column);
+	var res = this.game.fire(x, (column - 1));
+	
+	document.getElementById('response').innerHTML = res.message;
+	
 };;var app = new GameService();
+

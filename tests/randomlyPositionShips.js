@@ -32,9 +32,18 @@ describe('Feature: Randomly position ships on a 10x10 grid', function() {
 			});
 			
 			it('should assign ships to consecutive squares on the grid, either as a row, or column', function() {
-				consecutiveTest(app.game.ships[0].location).should.be.true;
-				consecutiveTest(app.game.ships[1].location).should.be.true;
-				consecutiveTest(app.game.ships[2].location).should.be.true;
+				for (var n = 0; n < 100; n++) {
+					var app = new GameService();
+					
+					for (var i in app.game.ships) {
+						if (app.game.isColumn(app.game.ships[i].location)) {
+							app.game.IsConsecutive(app.game.ships[i].location, 'col').should.be.true;
+						} else {
+							app.game.IsConsecutive(app.game.ships[i].location, 'row').should.be.true;
+						}
+					}
+				}
+				
 			});
 			
 			it('should not assign multiple ships to a single square', function() {

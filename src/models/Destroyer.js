@@ -17,3 +17,16 @@ Destroyer.prototype.addToSquare = function(square) {
 	var index = this.location.indexOf('');
 	this.location[index] = square;
 }
+
+Destroyer.prototype.isSunk = function() {
+	var counter = 0;
+	for (var i in this.location) {
+		var location = this.location[i];
+		if (location.isHit()) {
+			counter++;
+		}
+	}
+	console.log(counter, this.size, counter === this.size);
+	
+	return counter === this.size;
+}

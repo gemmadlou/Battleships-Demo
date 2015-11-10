@@ -154,3 +154,28 @@ Game.prototype.randomlyPositionShips = function() {
 	
 	positionShip(shipsArray);
 }
+
+Game.prototype.fire = function(x, y) {
+	
+	var response = {
+		message: 'No hit'
+	};
+	
+	stop:
+	for (var i in this.ships) {
+		var ship = this.ships[i];
+		for (var n in ship.location) {
+			var location = ship.location[n];
+			if (location.x === x && location.y === y) {
+				location.addHit();
+				response.message = 'Successful hit';
+				if (ship.isSunk()) {
+					response.message = 'You have sunk the '+ ship.constructor.name;
+				}
+				break stop;
+			}
+		}
+	}
+	
+	return response;
+}

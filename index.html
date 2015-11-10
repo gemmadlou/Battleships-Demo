@@ -10,7 +10,17 @@
 </head>
 
 <body>
+  <h1>Battleships!</h1>
+  <label>
+    Enter coordinates
+    <input type="text" id="command" size="2" placeholder="ie. A1-J10" 
+		onkeydown="if (event.keyCode == 13) app.fire()" />
+	<input type="submit" value="Fire" onclick="return app.fire()" />
+  </label>
+  <div id="response" style="font-style: oblique;">
+    <br/>
+	...waiting for your command
+  </div>
   <script src="dist/app.js" type="text/javascript"></script>
-  
 </body>
 </html>

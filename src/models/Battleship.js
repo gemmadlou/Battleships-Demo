@@ -16,3 +16,14 @@ Battleship.prototype.addToSquare = function(square) {
 	var index = this.location.indexOf('');
 	this.location[index] = square;
 }
+
+Battleship.prototype.isSunk = function() {
+	var counter = 0;
+	for (var i in this.location) {
+		var location = this.location[i];
+		if (location.isHit()) {
+			counter++;
+		}
+	}
+	return counter === this.size;
+}
