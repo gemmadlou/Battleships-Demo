@@ -25,8 +25,6 @@ Battleship.prototype.isSunk = function() {
 			counter++;
 		}
 	}
-	console.log(counter, this.size, counter === this.size);
-	
 	return counter === this.size;
 };function Destroyer(_game) {
 	this.size = 4;
@@ -56,7 +54,6 @@ Destroyer.prototype.isSunk = function() {
 			counter++;
 		}
 	}
-	console.log(counter, this.size, counter === this.size);
 	
 	return counter === this.size;
 };function Game() {
@@ -307,7 +304,7 @@ GameService.prototype.init = function() {
 
 GameService.prototype.fire = function() {
 	var command = document.getElementById('command').value;
-	console.log("command", command);
+	
 	if (command.length > 3) {
 		return alert("Invalid command length");
 	}
@@ -332,7 +329,7 @@ GameService.prototype.fire = function() {
 	}
 	
 	var x = this.rowCoords.indexOf(row.toUpperCase());
-	console.log("x", x, column);
+	
 	var res = this.game.fire(x, (column - 1));
 	
 	document.getElementById('response').innerHTML = res.message;

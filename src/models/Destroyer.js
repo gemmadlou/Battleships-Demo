@@ -26,7 +26,6 @@ Destroyer.prototype.isSunk = function() {
 			counter++;
 		}
 	}
-	console.log(counter, this.size, counter === this.size);
 	
 	return counter === this.size;
 }
