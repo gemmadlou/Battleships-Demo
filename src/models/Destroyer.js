@@ -1,6 +1,6 @@
 function Destroyer(_game) {
 	this.size = 4;
-	this.coordinates = [ "", "", "", "" ]
+	this.location = [ "", "", "", "" ]
 	
 	this._game = _game;
 	
@@ -11,4 +11,9 @@ function Destroyer(_game) {
 
 Destroyer.prototype.AddToGame = function() {
 	this._game.addShip(this);
+}
+
+Destroyer.prototype.addToSquare = function(square) {
+	var index = this.location.indexOf('');
+	this.location[index] = square;
 }

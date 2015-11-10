@@ -1,6 +1,6 @@
 function Battleship(_game) {
 	this.size = 5;
-	this.coordinates = ["", "", "", "", ""];
+	this.location = ["", "", "", "", ""];
 	this._game = _game;
 	
 	if (typeof _game !== 'undefined') {
@@ -10,4 +10,9 @@ function Battleship(_game) {
 
 Battleship.prototype.AddToGame = function() {
 	this._game.addShip(this);
+}
+
+Battleship.prototype.addToSquare = function(square) {
+	var index = this.location.indexOf('');
+	this.location[index] = square;
 }

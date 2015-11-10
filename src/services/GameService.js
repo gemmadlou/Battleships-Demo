@@ -1,8 +1,9 @@
-function App() {
+function GameService() {
+	this.rowCoords = ['A','B','C','D','E','F','G','H','I','J'];
 	this.init();
 }
 
-App.prototype.init = function() {
+GameService.prototype.init = function() {
 	if (typeof this.game === 'undefined') {
 		this.game = new Game();
 	} else {
@@ -17,9 +18,10 @@ App.prototype.init = function() {
 	
 	for (var x = 0; x < this.game.gridsize[0]; x++) {
 		for (var y = 0; y < this.game.gridsize[1]; y++) {
-			console.log(x, y);
 			new Square(this.game.grid, x, y);
 		}
 	}
+	
+	this.game.randomlyPositionShips();
 	
 }

@@ -9,7 +9,7 @@ describe('Ship: Destroyer', function() {
 	
 	it('Should have location coordinates length of 4', function() {
 		var destroyer = new Destroyer();
-		destroyer.coordinates.should.have.length(4);
+		destroyer.location.should.have.length(4);
 	});
 
 });

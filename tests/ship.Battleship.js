@@ -9,7 +9,7 @@ describe('Ship: Battleship', function() {
 	
 	it('Should have location coordinates length of 5', function() {
 		var battleship = new Battleship();
-		battleship.coordinates.should.have.length(5);
+		battleship.location.should.have.length(5);
 	});
 
 });

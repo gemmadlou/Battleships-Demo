@@ -1,1 +1,1 @@
-var app = new App();
+var app = new GameService();

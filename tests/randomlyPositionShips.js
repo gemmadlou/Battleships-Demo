@@ -15,32 +15,54 @@ describe('Feature: Randomly position ships on a 10x10 grid', function() {
 				+ '1 Battleship and 2 Destroyer', function() {
 			
 			it('Should assign all ships a location', function() {
-				game.ships[0].location[0].should.not.equal('');
-				game.ships[0].location[1].should.not.equal('');
-				game.ships[0].location[2].should.not.equal('');
-				game.ships[0].location[3].should.not.equal('');
-				game.ships[0].location[4].should.not.equal('');
-				game.ships[1].location[0].should.not.equal('');
-				game.ships[1].location[1].should.not.equal('');
-				game.ships[1].location[2].should.not.equal('');
-				game.ships[1].location[3].should.not.equal('');
-				game.ships[2].location[0].should.not.equal('');
-				game.ships[2].location[1].should.not.equal('');
-				game.ships[2].location[2].should.not.equal('');
-				game.ships[2].location[3].should.not.equal('');
+				app.game.ships[0].location[0].should.not.equal('');
+				app.game.ships[0].location[1].should.not.equal('');
+				app.game.ships[0].location[2].should.not.equal('');
+				app.game.ships[0].location[3].should.not.equal('');
+				app.game.ships[0].location[4].should.not.equal('');
+				app.game.ships[1].location[0].should.not.equal('');
+				app.game.ships[1].location[1].should.not.equal('');
+				app.game.ships[1].location[2].should.not.equal('');
+				app.game.ships[1].location[3].should.not.equal('');
+				app.game.ships[2].location[0].should.not.equal('');
+				app.game.ships[2].location[1].should.not.equal('');
+				app.game.ships[2].location[2].should.not.equal('');
+				app.game.ships[2].location[3].should.not.equal('');
 				
 			});
 			
 			it('should assign ships to consecutive squares on the grid, either as a row, or column', function() {
-				consecutiveTest(game.ships[0].location).should.be.true;
-				consecutiveTest(game.ships[1].location).should.be.true;
-				consecutiveTest(game.ships[2].location).should.be.true;
+				consecutiveTest(app.game.ships[0].location).should.be.true;
+				consecutiveTest(app.game.ships[1].location).should.be.true;
+				consecutiveTest(app.game.ships[2].location).should.be.true;
 			});
 			
 			it('should not assign multiple ships to a single square', function() {
-				for (var i = 0; i < 1000; i++) {
-					squareClashTest(game.grid).should.be.false;
+				var counter = 0;
+				
+				for (var i = 0; i < 100; i++) {
+					var game = new Game();
+
+					new Battleship(game);
+					new Destroyer(game);
+					new Destroyer(game);
+					
+					new Grid(game);
+					
+					for (var x = 0; x < game.gridsize[0]; x++) {
+						for (var y = 0; y < game.gridsize[1]; y++) {
+							new Square(game.grid, x, y);
+						}
+					}
+					
+					game.randomlyPositionShips();
+					
+					if (game.getAvailableSquares().length !== 87) counter++
+					
 				}
+				
+				counter.should.equal(0);
+				
 			});
 			
 		});
